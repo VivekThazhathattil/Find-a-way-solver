@@ -1,1 +1,4 @@
-* make a 8x6 grid
+[done] * make a 8x6 grid
+[done] * fix the vector size issue of circles in gdb
+* make the keypress event == R work
+

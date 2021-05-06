@@ -4,19 +4,26 @@
 #include "consts.h"
 #include "position.h"
 
-#define IX(i,j) i+
-
-Class Env{
+class Env{
 	private:
-		int m, int n;
-		vector<Pos> obstacles;
-		vector<bool> isVisited;
 		void genObstacles();
 		void genStartPos();
 		void genGrid();
-
+		void genDots();
+		Pos getFreeGrid();
 	public:
-		int idx(int& i, int& j, int& maxJ);
+		int m;
+		int n;
+		std::vector<Pos> obstacles;
+		std::vector<int> dots; // gid of all dots including grey and pink dots 
+		Pos startPos;
+		std::vector<bool> isVisited;
+		std::vector<Pos> gridId;
+
 		Env();
 		~Env();
+		void resetEnv();
+		bool isGridFree(int& gid); // check if an obstacle is present in the grid corresponding to the gid
+		int getGridIdFromPos(Pos& pos);
+		Pos getPosFromGridId(int& gid);
 };
