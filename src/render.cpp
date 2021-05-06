@@ -18,6 +18,9 @@ void Render::runSimulation(){
 						env.resetEnv();
 						resetRender();
 					}
+				case sf::Event::MouseButtonPressed:
+					if (e.mouseButton.button == sf::Mouse::Left){
+					}
 				default:
 					break;
 			}
@@ -80,5 +83,9 @@ ScreenPos Render::getScreenLocFromPos(Pos& pos){
 }
 
 void Render::resetRender(){
-
+	circles.clear();	
+	rects.clear();
+	lines.clear();
+	window.clear(sf::Color::White);	
+	createDrawables();
 }

@@ -6,6 +6,9 @@ Env::Env() {
 Env::~Env() {}
 
 void Env::resetEnv(){
+	isVisited.clear();
+	dots.clear();
+	obstacles.clear();
 	srand(time(NULL));
 	genGrid();
 	genObstacles();
@@ -27,7 +30,7 @@ void Env::genGrid(){
 }
 
 void Env::genObstacles(){
-	int numObstacles = rand()% MAX_OBSTACLES;
+	int numObstacles = rand()% (MAX_OBSTACLES-MIN_OBSTACLES) + MIN_OBSTACLES;
 	for(int i = 0; i < numObstacles; i++){
 		Pos pos = getFreeGrid();	
 		obstacles.push_back(pos);

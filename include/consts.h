@@ -4,6 +4,7 @@
 #define GRID_SPACING  50
 
 #define MAX_OBSTACLES 8
+#define MIN_OBSTACLES 2
 #define MIN_GRID_M 4
 #define MIN_GRID_N 4
 #define RAND_GRID_LIM 7

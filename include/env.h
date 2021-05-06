@@ -18,7 +18,6 @@ class Env{
 		std::vector<int> dots; // gid of all dots including grey and pink dots 
 		Pos startPos;
 		std::vector<bool> isVisited;
-		std::vector<Pos> gridId;
 
 		Env();
 		~Env();

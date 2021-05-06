@@ -1,4 +1,5 @@
 [done] * make a 8x6 grid
 [done] * fix the vector size issue of circles in gdb
-* make the keypress event == R work
+[done] * make the keypress event == R work
+* fix the mouse button pressed event to draw the lines and change the state
 
