@@ -1,5 +1,7 @@
 [done] * make a 8x6 grid
 [done] * fix the vector size issue of circles in gdb
 [done] * make the keypress event == R work
+[done] * check from the initial state if the problem is solvable. If not, generate a new problem.
+	generating adjacency matrix: starting from dots[0]; for dots[gid], check the nearest neighbours in up, down, left, right directions with boundary restrictions. if neighbour is an obstacle, set adjMat[gid][getGridIdFromPos(Obstacle_pos)] = false; else true;
 * fix the mouse button pressed event to draw the lines and change the state
 

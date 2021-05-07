@@ -4,10 +4,15 @@ Render::Render() : window(sf::RenderWindow(sf::VideoMode(WINDOW_SIZE_X, WINDOW_S
 Render::~Render() {}
 
 void Render::runSimulation(){
+	bool isPaused = false;
 	window.setPosition(sf::Vector2i(100,100));
-	createDrawables();
+	do{
+		env.resetEnv();
+		resetRender();
+	}while(!isProblemSolvable());
 	while(window.isOpen()){
 		sf::Event e;
+		window.clear(sf::Color::White);	
 		while(window.pollEvent(e)){
 			switch(e.type){
 				case sf::Event::Closed:
@@ -15,20 +20,24 @@ void Render::runSimulation(){
 					break;
 				case sf::Event::KeyPressed:
 					if(e.key.code == sf::Keyboard::R){
-						env.resetEnv();
-						resetRender();
+						do{
+							env.resetEnv();
+							resetRender();
+						}while(!isProblemSolvable());
 					}
 				case sf::Event::MouseButtonPressed:
 					if (e.mouseButton.button == sf::Mouse::Left){
 					}
+				case sf::Event::LostFocus:
+					isPaused = true;
+				case sf::Event::GainedFocus:
+					isPaused = false;
 				default:
 					break;
 			}
 		}	
-
-		// do something!
-		window.clear(sf::Color::White);	
-		drawNDisplayDrawables();
+		if(!isPaused)
+			drawNDisplayDrawables();
 	}
 }
 
@@ -86,6 +95,10 @@ void Render::resetRender(){
 	circles.clear();	
 	rects.clear();
 	lines.clear();
-	window.clear(sf::Color::White);	
+//	window.clear(sf::Color::White);	
 	createDrawables();
+}
+
+bool Render::isProblemSolvable(){
+	return env.getHamiltonianPath();
 }
