@@ -22,10 +22,10 @@ void Env::resetEnv(){
 void Env::genGrid(){
 /* gets a random number for m and n */		
 	while(1){
-		m = rand()%RAND_GRID_LIM + MIN_GRID_M;	
-		n = rand()%RAND_GRID_LIM + MIN_GRID_N;
-//		m = 2;
-//		n = 2;
+//		m = rand()%RAND_GRID_LIM + MIN_GRID_M;	
+//		n = rand()%RAND_GRID_LIM + MIN_GRID_N;
+		m = 2;
+		n = 2;
 
 		if ( (m+1)*GRID_SPACING < WINDOW_SIZE_X &&\
 			(n+1)*GRID_SPACING < WINDOW_SIZE_Y\
@@ -35,8 +35,8 @@ void Env::genGrid(){
 }
 
 void Env::genObstacles(){
-	int numObstacles = rand()% (MAX_OBSTACLES-MIN_OBSTACLES) + MIN_OBSTACLES;
-//	int numObstacles = 1;
+//	int numObstacles = rand()% (MAX_OBSTACLES-MIN_OBSTACLES) + MIN_OBSTACLES;
+	int numObstacles = 1;
 	for(int i = 0; i < numObstacles; i++){
 		Pos pos = getFreeGrid();	
 		obstacles.push_back(pos);

@@ -20,6 +20,9 @@ class Render{
 		void drawNDisplayDrawables();
 		bool isProblemSolvable();
 		void showSolution();
+
+		void getSolverMode();
+		void purgeSolverMode();
 	public:
 		Render();
 		~Render();

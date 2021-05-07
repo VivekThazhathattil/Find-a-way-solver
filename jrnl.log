@@ -4,4 +4,4 @@
 [done] * check from the initial state if the problem is solvable. If not, generate a new problem.
 	generating adjacency matrix: starting from dots[0]; for dots[gid], check the nearest neighbours in up, down, left, right directions with boundary restrictions. if neighbour is an obstacle, set adjMat[gid][getGridIdFromPos(Obstacle_pos)] = false; else true;
 [done] * show solution when you press s on the keyboard
-
+* press c to switch back and forth between solver and generator modes.

@@ -1,0 +1,38 @@
+./src/render.cpp: In member function ‘void Render::runSimulation()’:
+./src/render.cpp:95:29: error: qualified-id in declaration before ‘(’ token
+   95 | void Render::createDrawables(){
+      |                             ^
+./src/render.cpp:101:35: error: qualified-id in declaration before ‘(’ token
+  101 | void Render::drawNDisplayDrawables(){
+      |                                   ^
+./src/render.cpp:111:25: error: qualified-id in declaration before ‘(’ token
+  111 | void Render::createRects(){
+      |                         ^
+./src/render.cpp:123:27: error: qualified-id in declaration before ‘(’ token
+  123 | void Render::createCircles(){
+      |                           ^
+./src/render.cpp:139:38: error: qualified-id in declaration before ‘(’ token
+  139 | ScreenPos Render::getScreenLocFromPos(Pos& pos){
+      |                                      ^
+./src/render.cpp:147:25: error: qualified-id in declaration before ‘(’ token
+  147 | void Render::resetRender(){
+      |                         ^
+./src/render.cpp:155:31: error: qualified-id in declaration before ‘(’ token
+  155 | bool Render::isProblemSolvable(){
+      |                               ^
+./src/render.cpp:159:26: error: qualified-id in declaration before ‘(’ token
+  159 | void Render::showSolution(){
+      |                          ^
+./src/render.cpp:183:27: error: qualified-id in declaration before ‘(’ token
+  183 | void Render::getSolverMode(){
+      |                           ^
+./src/render.cpp:213:29: error: qualified-id in declaration before ‘(’ token
+  213 | void Render::purgeSolverMode(){
+      |                             ^
+./src/render.cpp:215:1: error: expected ‘}’ at end of input
+  215 | }
+      | ^
+./src/render.cpp:7:29: note: to match this ‘{’
+    7 | void Render::runSimulation(){
+      |                             ^
+make: *** [Makefile:2: build] Error 1

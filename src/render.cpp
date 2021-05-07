@@ -7,6 +7,8 @@ Render::~Render() {}
 void Render::runSimulation(){
 	bool isPaused = false;
 	bool solutionMode = false;
+	bool solverMode = false;
+	bool solverSolutionMode = false;
 	window.setPosition(sf::Vector2i(100,100));
 	do{
 		env.resetEnv();
@@ -36,6 +38,36 @@ void Render::runSimulation(){
 							solutionMode = false;
 							lines.clear();
 							//reset circle colors
+							for(int i = 0; i < circles.size(); i++)
+								circles[i].setFillColor(sf::Color(204,204,204)); 
+							// find the circle which matches the starting pos
+							for (int i = 0; i < env.dots.size(); i++){
+								if(env.getGridIdFromPos(env.startPos) == env.dots[i])
+									circles[i].setFillColor(sf::Color(233,76,111));
+							}
+						}
+					}
+					else if (e.key.code == sf::Keyboard::C){
+						if(!solverMode){
+							solverMode = true;
+							std::cout << "Hello\n";
+							getSolverMode();
+						}
+						else{
+							solverMode = false;
+							solutionMode = false;
+							purgeSolverMode();
+						}
+					}
+
+					else if (e.key.code == sf::Keyboard::V){
+						if(!solverSolutionMode){
+							solverSolutionMode = true;
+							bool temp = isProblemSolvable();
+							showSolution();
+						}
+						else{
+							solverSolutionMode = false;
 							for(int i = 0; i < circles.size(); i++)
 								circles[i].setFillColor(sf::Color(204,204,204)); 
 							// find the circle which matches the starting pos
@@ -147,4 +179,38 @@ void Render::showSolution(){
 	}
 	for(int i = 0; i < circles.size(); i++)
 		circles[i].setFillColor(sf::Color(233,76,111)); 
+}
+
+void Render::getSolverMode(){	
+	window.clear();
+	env.path.clear();	
+	env.dots.clear();
+	env.obstacles.clear();
+	env.adjMat.clear();
+	int numObstacles;
+
+	std::cin >> env.m >> env.n >> numObstacles;
+
+	Pos pos;
+	for(int i = 0; i < numObstacles; i++){
+		std::cin >> pos.x >> pos.y;
+		env.obstacles.push_back(pos);
+	}
+
+	std::cin >> env.startPos.x >> env.startPos.y;
+
+	for (int i = 0; i < env.m * env.n; i++)
+	{
+		Pos pos = env.getPosFromGridId(i);
+		if(env.isGridFree(i))
+		{ 
+			env.dots.push_back(i);
+		}
+	}
+
+	resetRender();	
+}
+
+void Render::purgeSolverMode(){
+
 }

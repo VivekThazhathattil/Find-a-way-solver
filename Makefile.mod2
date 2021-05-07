@@ -1,6 +1,0 @@
-build:	./src/solver/*.cpp
-	g++ -g -std=c++17 -c ./src/solver/*.cpp
-	mkdir -p obj/solver && mv ./*.o ./obj/solver
-	g++ -g ./obj/solver/*.o -o solver -lsfml-graphics -lsfml-window -lsfml-system
-	chmod 755 ./solver
-	./solver
