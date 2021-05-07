@@ -19,6 +19,7 @@ class Render{
 		void createCircles();
 		void drawNDisplayDrawables();
 		bool isProblemSolvable();
+		void showSolution();
 	public:
 		Render();
 		~Render();
