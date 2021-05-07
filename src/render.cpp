@@ -1,10 +1,12 @@
 #include "../include/render.h"
+#include <iostream>
 
 Render::Render() : window(sf::RenderWindow(sf::VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "Find a way solver!", sf::Style::Close)) {}
 Render::~Render() {}
 
 void Render::runSimulation(){
 	bool isPaused = false;
+	bool solutionMode = false;
 	window.setPosition(sf::Vector2i(100,100));
 	do{
 		env.resetEnv();
@@ -24,6 +26,24 @@ void Render::runSimulation(){
 							env.resetEnv();
 							resetRender();
 						}while(!isProblemSolvable());
+					}
+					else if (e.key.code == sf::Keyboard::S){
+						if(!solutionMode){
+							solutionMode = true;
+							showSolution();
+						}
+						else{
+							solutionMode = false;
+							lines.clear();
+							//reset circle colors
+							for(int i = 0; i < circles.size(); i++)
+								circles[i].setFillColor(sf::Color(204,204,204)); 
+							// find the circle which matches the starting pos
+							for (int i = 0; i < env.dots.size(); i++){
+								if(env.getGridIdFromPos(env.startPos) == env.dots[i])
+									circles[i].setFillColor(sf::Color(233,76,111));
+							}
+						}
 					}
 				case sf::Event::MouseButtonPressed:
 					if (e.mouseButton.button == sf::Mouse::Left){
@@ -48,6 +68,8 @@ void Render::createDrawables(){
 }
 
 void Render::drawNDisplayDrawables(){
+	for(int i = 0; i < lines.size(); i++)
+		window.draw(lines[i]);
 	for(int i = 0; i < circles.size(); i++)
 		window.draw(circles[i]);
 	for(int i = 0; i < rects.size(); i++)
@@ -72,9 +94,9 @@ void Render::createCircles(){
 		sf::CircleShape circle;
 		Pos pos = env.getPosFromGridId(env.dots[i]);
 		if(env.startPos.x == pos.x && env.startPos.y == pos.y)
-			circle.setFillColor(sf::Color(233,76,111)); //grey
+			circle.setFillColor(sf::Color(233,76,111)); //pink
 		else
-			circle.setFillColor(sf::Color(204,204,204)); //pink
+			circle.setFillColor(sf::Color(204,204,204)); //grey
 		circle.setRadius(float(RECT_SIZE/2));
 		circle.setOrigin(sf::Vector2f(RECT_SIZE/2,RECT_SIZE/2));
 		ScreenPos scrPos = getScreenLocFromPos(pos);
@@ -101,4 +123,28 @@ void Render::resetRender(){
 
 bool Render::isProblemSolvable(){
 	return env.getHamiltonianPath();
+}
+
+void Render::showSolution(){
+	sf::RectangleShape  rect;
+	rect.setFillColor(sf::Color(233,76,111)); //pink
+	for(int i = 0; i < env.path.size()-1; i++){
+		Pos posFirst = env.getPosFromGridId(env.path[i]);
+		Pos posSecond = env.getPosFromGridId(env.path[i+1]);
+		ScreenPos pos0 = getScreenLocFromPos(posFirst);
+		ScreenPos pos1 = getScreenLocFromPos(posSecond);
+		rect.setPosition(sf::Vector2f(int((pos0.x+pos1.x)/2), int((pos0.y+pos1.y)/2)));
+		if(pos0.x == pos1.x){ //vertical
+			rect.setOrigin(sf::Vector2f(RECT_SIZE/4,GRID_SPACING/2));
+			rect.setSize(sf::Vector2f(RECT_SIZE/2,GRID_SPACING));
+		}
+		else{ //horizontal
+			rect.setOrigin(sf::Vector2f(GRID_SPACING/2,RECT_SIZE/4));
+			rect.setSize(sf::Vector2f(GRID_SPACING,RECT_SIZE/2));
+		}
+
+		lines.push_back(rect);
+	}
+	for(int i = 0; i < circles.size(); i++)
+		circles[i].setFillColor(sf::Color(233,76,111)); 
 }

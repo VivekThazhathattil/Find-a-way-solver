@@ -1,4 +1,5 @@
 #include "../include/env.h"
+#include <iostream>
 
 Env::Env() {
 	resetEnv();
@@ -23,8 +24,8 @@ void Env::genGrid(){
 	while(1){
 		m = rand()%RAND_GRID_LIM + MIN_GRID_M;	
 		n = rand()%RAND_GRID_LIM + MIN_GRID_N;
-//		m = 4;
-//		n = 4;
+//		m = 2;
+//		n = 2;
 
 		if ( (m+1)*GRID_SPACING < WINDOW_SIZE_X &&\
 			(n+1)*GRID_SPACING < WINDOW_SIZE_Y\
